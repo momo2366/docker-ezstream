@@ -8,10 +8,10 @@
 ## 生成镜像
 	$ docker image build -t ezstream .
 
-##部署
+## 部署
 	$ ./INSTALL
 将你的音频文件都丢到/home/mp3下面
 
-##运行/刷新歌单+重启
+## 运行/刷新歌单+重启
 docker-ezstream
 
