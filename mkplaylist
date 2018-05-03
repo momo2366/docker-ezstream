@@ -1,0 +1,58 @@
+#!/bin/bash
+
+#run this script to make a playlist.txt for ezstream
+#this script was created by momo<momo@whitecrow.com.cn>
+
+if [ $# != 0 ] && [ $# != 4 ] && [ $# != 2 ]
+then
+	echo "useage mkplaylist [<option>...] command"
+	echo "Commands:"
+	echo "-h"
+	echo "-m <music files path(*.mp3/*.ogg)>"
+	echo "-p <playlist.txt path>"
+	echo "default path is currect path :`pwd`"
+	echo "pls do not use ./ or ../"
+	exit 1
+fi
+
+MUSICPATH=`pwd`
+LISTPATH=`pwd`
+
+if [ $# == 2 ] || [ $# == 4 ]
+then
+	if [ $1 == "-m" ]
+	then
+		MUSICPATH=$2
+	fi
+	if [ $1 == "-p" ]
+	then
+		LISTPATH=$2
+	fi
+fi
+
+if [ $# == 4 ]
+then
+	if [ $3 == "-m" ]
+	then
+		MUSICPATH=$4
+	fi
+	if [ $3 == "-p" ]
+	then
+		LISTPATH=$4
+	fi
+fi
+
+echo "start scan $MUSICPATH and make $LISTPATH/playlist.txt"
+
+#backup playlist.txt
+if [ -f $LISTPATH/playlist.txt ]
+then
+	mv $LISTPATH/playlist.txt $LISTPATH/playlist.txt.bak
+fi
+
+#find music file and write into playlist.txt
+find $MUSICPATH |grep -E '.mp3|.ogg' |shuf -o $LISTPATH/playlist.txt
+echo "make playlist.txt done!"
+
+
+exit 0

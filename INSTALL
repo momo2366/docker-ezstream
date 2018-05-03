@@ -1,0 +1,3 @@
+#!/bin/bash
+cp mkplaylist /usr/bin && chmod +x /usr/bin/mkplaylist
+cp docker-ezstream /usr/bin && chmod +x /usr/bin/docker-ezstream
