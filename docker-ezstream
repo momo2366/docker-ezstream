@@ -1,7 +1,13 @@
 #!/bin/bash
 #restart
 mkplaylist -m /home/mp3/ -p /home/mp3/
-docker stop ezstream
-docker rm ezstream
-docker run -v /home/mp3/:/home/mp3 --name ezstream -it --restart unless-stopped --net=host -d club-ezstream
-
+docker top ezstream
+if [ $? != 0 ]
+then
+	docker stop ezstream
+	docker rm ezstream
+	docker run -v /home/mp3/:/home/mp3 --name ezstream -it --restart unless-stopped --net=host -d club-ezstream
+else
+	docker restart ezstream
+fi
+	
